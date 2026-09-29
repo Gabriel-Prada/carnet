@@ -83,7 +83,7 @@
   .switch:focus-visible, .nav button:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
   .band { position: relative; margin-top: 10px; }
   .band svg.wave { display: block; width: 100%; height: 70px; margin-bottom: -1px; }
-  .band-body { background: var(--band); padding: 0 20px 14px; text-align: center; }
+  .band-body { background: var(--band); padding: 0 20px 40px; text-align: center; }
   .avatar {
     position: absolute; left: 50%; top: 0; transform: translateX(-50%);
     width: 176px; height: 176px; border-radius: 50%;
@@ -2442,7 +2442,7 @@ var qrcode = function() {
     position:relative;
     /* ancho y alto explícitos: en iPhone aspect-ratio dejaba lo blanco más alto que el anillo */
     width:200px; height:200px;      /* respaldo para iPhone con iOS viejo */
-    --lado: min(62cqw, 270px, calc(100cqh - 20px));
+    --lado: min(68cqw, 300px, calc(100cqh - 16px));
     width:var(--lado); height:var(--lado);
     flex-shrink:0;
     padding:14px;
@@ -2723,8 +2723,21 @@ var qrcode = function() {
   requestAnimationFrame(ciclo);
   </script>
 <script>
-  /* Alto real de la pantalla */
-  function fijarAlto(){ document.documentElement.style.setProperty("--alto", window.innerHeight + "px"); }
+  /*
+   * En modo app el iPhone deja un espacio vacío abajo (~1 cm).
+   * Se estira el carnet al alto físico completo de la pantalla.
+   * AJUSTE_ABAJO: píxeles extra por si hace falta afinar (+ baja la barra, - la sube).
+   */
+  const AJUSTE_ABAJO = 0;
+  const modoApp = navigator.standalone === true ||
+                  matchMedia("(display-mode: standalone)").matches;
+  function fijarAlto(){
+    const phone = document.querySelector(".phone");
+    if (!phone || !modoApp) return;
+    const alto = Math.max(window.innerHeight, screen.height) + AJUSTE_ABAJO;
+    phone.style.bottom = "auto";
+    phone.style.height = alto + "px";
+  }
   fijarAlto();
   addEventListener("resize", fijarAlto);
   addEventListener("orientationchange", () => setTimeout(fijarAlto, 300));
