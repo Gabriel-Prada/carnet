@@ -48,8 +48,8 @@
     -webkit-text-size-adjust: 100%;
   }
   .phone {
-    position: relative;
-    width: 100%; max-width: 440px; height: var(--alto, 100%);
+    position: fixed; top: 0; bottom: 0; left: 0; right: 0;   /* pegado a los 4 bordes */
+    width: 100%; max-width: 440px;
     margin: 0 auto;
     background: var(--surface);
     overflow: hidden;
@@ -86,11 +86,11 @@
   .band-body { background: var(--band); padding: 0 20px 14px; text-align: center; }
   .avatar {
     position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-    width: 150px; height: 150px; border-radius: 50%;
-    background: #e9e7e4; border: 7px solid var(--band);
+    width: 176px; height: 176px; border-radius: 50%;
+    background: #e9e7e4; border: 8px solid var(--band);
     display: grid; place-items: center; overflow: hidden;
   }
-  .role { font-size: 22px; font-weight: 500; padding-top: 94px; margin: 0 0 10px; }
+  .role { font-size: 22px; font-weight: 500; padding-top: 120px; margin: 0 0 10px; }
   .divider { height: 1px; background: rgba(255,255,255,.3); margin: 0 0 12px; }
   .meta { font-size: 16px; font-weight: 500; line-height: 1.5; margin: 0; }
   .meta small { display: block; color: var(--warn); font-size: 12px; font-weight: 500; margin-top: 6px; min-height: 18px; }
@@ -2442,7 +2442,7 @@ var qrcode = function() {
     position:relative;
     /* ancho y alto explícitos: en iPhone aspect-ratio dejaba lo blanco más alto que el anillo */
     width:200px; height:200px;      /* respaldo para iPhone con iOS viejo */
-    --lado: min(55cqw, 250px, calc(100cqh - 24px));
+    --lado: min(62cqw, 270px, calc(100cqh - 20px));
     width:var(--lado); height:var(--lado);
     flex-shrink:0;
     padding:14px;
