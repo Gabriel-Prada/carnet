@@ -1,5 +1,5 @@
 /* Cambia este número cada vez que subas una versión nueva */
-const CACHE = "carnet-digital-v6";
+const CACHE = "carnet-digital-v7";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", event => {

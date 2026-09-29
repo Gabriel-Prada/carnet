@@ -31,14 +31,16 @@
   }
   *, *::before, *::after { box-sizing: inherit; }
   /* App a pantalla completa: nada se desplaza, nada se amplía */
+  /* En modo app del iPhone, 100% y "fixed" terminan ~1 cm antes del borde.
+     100vh / 100lvh sí cubren la pantalla completa. */
   html, body {
-    margin: 0; height: 100%;
+    margin: 0;
+    height: 100vh; height: 100lvh;
     overflow: hidden;
     overscroll-behavior: none;
     background: var(--surface);
   }
   body {
-    position: fixed; inset: 0;
     font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color: var(--text);
     touch-action: none;                  /* sin pellizcar para ampliar ni arrastrar */
@@ -48,8 +50,9 @@
     -webkit-text-size-adjust: 100%;
   }
   .phone {
-    position: fixed; top: 0; bottom: 0; left: 0; right: 0;   /* pegado a los 4 bordes */
+    position: relative;
     width: 100%; max-width: 440px;
+    height: 100vh; height: 100lvh;
     margin: 0 auto;
     background: var(--surface);
     overflow: hidden;
@@ -63,7 +66,7 @@
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
   .institution {
     text-align: center; color: var(--lime);
-    font-size: 15px; font-weight: 500; margin: 10px 16px 4px;
+    font-size: 15px; font-weight: 500; margin: 6px 16px 2px;
   }
   .name-row {
     display: flex; align-items: center; justify-content: space-between;
@@ -83,21 +86,21 @@
   .switch:focus-visible, .nav button:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
   .band { position: relative; margin-top: 10px; }
   .band svg.wave { display: block; width: 100%; height: 70px; margin-bottom: -1px; }
-  .band-body { background: var(--band); padding: 0 20px 40px; text-align: center; }
+  .band-body { background: var(--band); padding: 0 20px 30px; text-align: center; }
   .avatar {
     position: absolute; left: 50%; top: 0; transform: translateX(-50%);
     width: 176px; height: 176px; border-radius: 50%;
     background: #e9e7e4; border: 8px solid var(--band);
     display: grid; place-items: center; overflow: hidden;
   }
-  .role { font-size: 22px; font-weight: 500; padding-top: 120px; margin: 0 0 10px; }
-  .divider { height: 1px; background: rgba(255,255,255,.3); margin: 0 0 12px; }
+  .role { font-size: 22px; font-weight: 500; padding-top: 112px; margin: 0 0 8px; }
+  .divider { height: 1px; background: rgba(255,255,255,.3); margin: 0 0 10px; }
   .meta { font-size: 16px; font-weight: 500; line-height: 1.5; margin: 0; }
   .meta small { display: block; color: var(--warn); font-size: 12px; font-weight: 500; margin-top: 6px; min-height: 18px; }
-  .band-bottom { display: block; width: 100%; height: 26px; margin-top: -1px; }
+  .band-bottom { display: block; width: 100%; height: 20px; margin-top: -1px; }
   .nav {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    padding: 6px 8px 4px;
+    padding: 6px 8px max(6px, calc(env(safe-area-inset-bottom, 0px) - 8px));
     border-top: 1px solid rgba(255,255,255,.08);
     flex-shrink: 0;
   }
@@ -2442,7 +2445,7 @@ var qrcode = function() {
     position:relative;
     /* ancho y alto explícitos: en iPhone aspect-ratio dejaba lo blanco más alto que el anillo */
     width:200px; height:200px;      /* respaldo para iPhone con iOS viejo */
-    --lado: min(68cqw, 300px, calc(100cqh - 16px));
+    --lado: min(72cqw, 310px, calc(100cqh - 14px));
     width:var(--lado); height:var(--lado);
     flex-shrink:0;
     padding:14px;
