@@ -9,7 +9,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Carnet">
-<meta name="theme-color" content="#1c1d1b">
+<meta name="theme-color" content="#26251c">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,6 +58,10 @@
     overflow: hidden;
     display: flex; flex-direction: column;
     padding-top: env(safe-area-inset-top, 0px);   /* debajo de la hora y la batería */
+    /* franja de la hora y la batería con el color oscuro del centro del carnet */
+    background: linear-gradient(to bottom,
+      var(--band) env(safe-area-inset-top, 0px),
+      var(--surface) env(safe-area-inset-top, 0px));
   }
   .watermark {
     position: absolute; inset: 0; pointer-events: none; z-index: 5;
