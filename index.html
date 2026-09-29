@@ -49,7 +49,7 @@
   }
   .phone {
     position: relative;
-    width: 100%; max-width: 440px; height: 100%;
+    width: 100%; max-width: 440px; height: var(--alto, 100%);
     margin: 0 auto;
     background: var(--surface);
     overflow: hidden;
@@ -63,7 +63,7 @@
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
   .institution {
     text-align: center; color: var(--lime);
-    font-size: 15px; font-weight: 500; margin: 18px 16px 6px;
+    font-size: 15px; font-weight: 500; margin: 10px 16px 4px;
   }
   .name-row {
     display: flex; align-items: center; justify-content: space-between;
@@ -81,23 +81,23 @@
     stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
   }
   .switch:focus-visible, .nav button:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
-  .band { position: relative; margin-top: 18px; }
+  .band { position: relative; margin-top: 10px; }
   .band svg.wave { display: block; width: 100%; height: 70px; margin-bottom: -1px; }
-  .band-body { background: var(--band); padding: 0 20px 34px; text-align: center; }
+  .band-body { background: var(--band); padding: 0 20px 14px; text-align: center; }
   .avatar {
     position: absolute; left: 50%; top: 0; transform: translateX(-50%);
     width: 150px; height: 150px; border-radius: 50%;
     background: #e9e7e4; border: 7px solid var(--band);
     display: grid; place-items: center; overflow: hidden;
   }
-  .role { font-size: 22px; font-weight: 500; padding-top: 100px; margin: 0 0 10px; }
+  .role { font-size: 22px; font-weight: 500; padding-top: 94px; margin: 0 0 10px; }
   .divider { height: 1px; background: rgba(255,255,255,.3); margin: 0 0 12px; }
   .meta { font-size: 16px; font-weight: 500; line-height: 1.5; margin: 0; }
   .meta small { display: block; color: var(--warn); font-size: 12px; font-weight: 500; margin-top: 6px; min-height: 18px; }
-  .band-bottom { display: block; width: 100%; height: 40px; margin-top: -1px; }
+  .band-bottom { display: block; width: 100%; height: 26px; margin-top: -1px; }
   .nav {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    padding: 10px 8px calc(12px + env(safe-area-inset-bottom, 0px));
+    padding: 8px 8px max(8px, calc(env(safe-area-inset-bottom, 0px) - 12px));
     border-top: 1px solid rgba(255,255,255,.08);
     flex-shrink: 0;
   }
@@ -2434,7 +2434,7 @@ var qrcode = function() {
 
 <style id="qr-style">
   .qr-wrap{
-    flex:1; min-height:0;           /* ocupa el espacio entre la franja y la barra */
+    flex:1; min-height:0; padding:4px 0;           /* ocupa el espacio entre la franja y la barra */
     display:flex; justify-content:center; align-items:center;
     container-type:size;
   }
@@ -2442,7 +2442,7 @@ var qrcode = function() {
     position:relative;
     /* ancho y alto explícitos: en iPhone aspect-ratio dejaba lo blanco más alto que el anillo */
     width:200px; height:200px;      /* respaldo para iPhone con iOS viejo */
-    --lado: min(220px, calc(100cqh - 24px), calc(100cqw - 64px));
+    --lado: min(55cqw, 250px, calc(100cqh - 24px));
     width:var(--lado); height:var(--lado);
     flex-shrink:0;
     padding:14px;
@@ -2723,6 +2723,12 @@ var qrcode = function() {
   requestAnimationFrame(ciclo);
   </script>
 <script>
+  /* Alto real de la pantalla */
+  function fijarAlto(){ document.documentElement.style.setProperty("--alto", window.innerHeight + "px"); }
+  fijarAlto();
+  addEventListener("resize", fijarAlto);
+  addEventListener("orientationchange", () => setTimeout(fijarAlto, 300));
+
   /* Sin zoom: pellizco, doble toque y gestos de iOS */
   ["gesturestart","gesturechange","gestureend"].forEach(ev =>
     document.addEventListener(ev, e => e.preventDefault(), {passive:false}));
