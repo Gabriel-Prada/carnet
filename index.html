@@ -18,8 +18,8 @@
 <style>
   :root {
     box-sizing: border-box;
-    --page: #5f5d4b;
-    --surface: #5f5d4b;
+    --page: #525041;
+    --surface: #525041;
     --band: #26251c;
     --text: #bff3ea;      /* celeste aguamarina, tomado de la foto */
     --muted: #aee8de;
@@ -67,11 +67,11 @@
   }
   .name-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 22px 0;
+    padding: 4px 22px 0;
   }
   .name-row h1 { font-size: 24px; font-weight: 600; margin: 0; }
   .switch {
-    width: 52.2px; height: 52.2px; border-radius: 12.6px; border: 0;
+    width: 62.6px; height: 62.6px; border-radius: 15.1px; border: 0;
     background: var(--teal); color: #fff; cursor: default;
     display: grid; place-items: center; overflow: hidden; padding: 0;
     box-shadow: 0 4px 10px rgba(0,0,0,.3);
@@ -97,25 +97,25 @@
   .band-bottom { display: block; width: 100%; height: 26px; margin-top: -1px; }
   .nav {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    padding: 8px 8px max(8px, calc(env(safe-area-inset-bottom, 0px) - 12px));
+    padding: 6px 8px 4px;
     border-top: 1px solid rgba(255,255,255,.08);
     flex-shrink: 0;
   }
   .nav button {
-    background: none; border: 0; color: var(--nav); font: inherit; font-size: 13px;
+    background: none; border: 0; color: var(--nav); font: inherit; font-size: 14px;
     display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; padding: 4px;
   }
-  .nav .icon { width: 56px; height: 32px; border-radius: 12px; display: grid; place-items: center; }
+  .nav .icon { width: 62px; height: 36px; border-radius: 12px; display: grid; place-items: center; }
   .nav button[aria-current="page"] .icon { background: var(--lime); color: #1a2a05; }
   .nav button[aria-current="page"] { font-weight: 600; }
 </style>
 
 <style id="supplied-logo-style">
   .switch {
-    width: 52.2px !important;
-    height: 52.2px !important;
+    width: 62.6px !important;
+    height: 62.6px !important;
     padding: 0 !important;
-    border-radius: 12.6px !important;
+    border-radius: 15.1px !important;
     overflow: hidden !important;
     background: #15605a !important;   /* mismo fondo del logo */
     display: grid !important;
@@ -124,8 +124,8 @@
   .switch-logo-image {
     /* el símbolo blanco ocupa ~74% de la imagen: 27.8px → ~21px,
        la altura de la G mayúscula del nombre */
-    width: 27.8px !important;
-    height: 27.8px !important;
+    width: 33.4px !important;
+    height: 33.4px !important;
     display: block !important;
     object-fit: cover !important;
   }
@@ -2519,13 +2519,13 @@ var qrcode = function() {
 
   <nav class="nav" aria-label="Navegación principal">
     <button aria-current="page"><span class="icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg></span>Inicio</button>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg></span>Inicio</button>
     <button><span class="icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Horario</button>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Horario</button>
     <button><span class="icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></svg></span>Notas</button>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></svg></span>Notas</button>
     <button><span class="icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>Menú</button>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>Menú</button>
   </nav>
 </main>
 
@@ -2592,7 +2592,7 @@ var qrcode = function() {
      * El hueco central es suficientemente pequeño para conservar
      * la apariencia de QR denso de la foto y la tolerancia H.
      */
-    const hueco = 13;     /* lado del cuadro blanco central, en puntos */
+    const hueco = 15;     /* lado del cuadro blanco central, en puntos */
     const ini = Math.floor((n-hueco)/2);
     const fin = ini+hueco;
   
@@ -2675,7 +2675,7 @@ var qrcode = function() {
     }
   
     /* Hueco blanco central donde va el logo */
-    const TAM_LOGO = 9.5; /* tamaño del logo, en puntos */
+    const TAM_LOGO = 11; /* tamaño del logo, en puntos */
     const hx = margen + ini, hy = margen + ini;
     const logoSVG = LOGO
       ? `<image href="${LOGO}" x="${hx+(hueco-TAM_LOGO)/2}" y="${hy+(hueco-TAM_LOGO)/2}"
@@ -2723,25 +2723,6 @@ var qrcode = function() {
   requestAnimationFrame(ciclo);
   </script>
 <script>
-  /*
-   * En modo app el iPhone deja un espacio vacío abajo (~1 cm).
-   * Se estira el carnet al alto físico completo de la pantalla.
-   * AJUSTE_ABAJO: píxeles extra por si hace falta afinar (+ baja la barra, - la sube).
-   */
-  const AJUSTE_ABAJO = 0;
-  const modoApp = navigator.standalone === true ||
-                  matchMedia("(display-mode: standalone)").matches;
-  function fijarAlto(){
-    const phone = document.querySelector(".phone");
-    if (!phone || !modoApp) return;
-    const alto = Math.max(window.innerHeight, screen.height) + AJUSTE_ABAJO;
-    phone.style.bottom = "auto";
-    phone.style.height = alto + "px";
-  }
-  fijarAlto();
-  addEventListener("resize", fijarAlto);
-  addEventListener("orientationchange", () => setTimeout(fijarAlto, 300));
-
   /* Sin zoom: pellizco, doble toque y gestos de iOS */
   ["gesturestart","gesturechange","gestureend"].forEach(ev =>
     document.addEventListener(ev, e => e.preventDefault(), {passive:false}));
